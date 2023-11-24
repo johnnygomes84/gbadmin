@@ -14,4 +14,8 @@ interface TuitionRepository extends MongoRepository<Tuition, String> {
     Page<Tuition> findByStudentNumber(Pageable pageable, Long studentNumber)
 
     Page<Tuition> findByReferenceMonth(Pageable pageable, MonthsEnum refMonth)
+
+    List<Tuition> findByReferenceMonth(MonthsEnum refMonth)
+
+    Long countByReferenceMonth(MonthsEnum refMonth)
 }
