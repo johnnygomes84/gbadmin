@@ -34,7 +34,6 @@ class TuitionService {
         repository.save(tuition)
     }
 
-
     Page<Tuition> findAll(SearchContext searchContext) {
         repository.findAll(PageRequest.of(searchContext.page, searchContext.size))
     }

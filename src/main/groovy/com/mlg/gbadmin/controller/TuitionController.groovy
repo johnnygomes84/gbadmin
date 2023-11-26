@@ -39,6 +39,11 @@ class TuitionController {
         ResponseEntity.ok(service.findAll(searchContext))
     }
 
+    @GetMapping("/{id}")
+    ResponseEntity<Page<Student>> findById(@PathVariable String id) {
+        ResponseEntity.ok(service.findById(id))
+    }
+
     @DeleteMapping("/delete/{id}")
     ResponseEntity<Boolean> deleteStudent(@PathVariable String id) {
         ResponseEntity.ok(service.deleteById(id))
