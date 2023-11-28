@@ -13,11 +13,8 @@ import groovy.transform.TupleConstructor
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
-import org.springframework.web.client.HttpClientErrorException
-
 import java.time.LocalDate
 import java.time.Month
-import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
 
 @Service

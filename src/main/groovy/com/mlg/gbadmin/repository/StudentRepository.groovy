@@ -15,4 +15,6 @@ interface StudentRepository extends MongoRepository<Student, String> {
     Page<Student> findByStatusAndStudentNumberNotIn(PageRequest pageRequest, StatusEnum status, List<Long> studentNumber)
 
     Long countByStatus(StatusEnum status)
+
+    List<Student> findByStudentNumberIn(Set<Long> studentNumberList)
 }
