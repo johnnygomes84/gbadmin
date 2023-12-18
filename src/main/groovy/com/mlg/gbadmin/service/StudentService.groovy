@@ -34,4 +34,8 @@ class StudentService {
         repository.deleteById(id)
         true
     }
+
+    List<Student> findByStatus(SearchContext context) {
+        repository.findByStatus(context.studentStatus)
+    }
 }

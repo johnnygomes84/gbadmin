@@ -17,4 +17,6 @@ interface StudentRepository extends MongoRepository<Student, String> {
     Long countByStatus(StatusEnum status)
 
     List<Student> findByStudentNumberIn(Set<Long> studentNumberList)
+
+    List<Student> findByStatus(StatusEnum status)
 }
