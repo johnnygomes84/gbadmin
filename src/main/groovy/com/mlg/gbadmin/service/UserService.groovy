@@ -1,18 +1,15 @@
 package com.mlg.gbadmin.service
 
 import com.mlg.gbadmin.config.TokenService
-import com.mlg.gbadmin.config.WebSecurity
-import com.mlg.gbadmin.dto.user.AuthDto
 import com.mlg.gbadmin.dto.user.AuthResponseDto
 import com.mlg.gbadmin.dto.user.UserRegisterDto
 import com.mlg.gbadmin.exception.EntityNotFoundException
+import com.mlg.gbadmin.model.SearchContext
 import com.mlg.gbadmin.model.User
 import com.mlg.gbadmin.repository.UserRepository
 import groovy.transform.TupleConstructor
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
-import org.springframework.security.authentication.AuthenticationManager
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.data.domain.PageRequest
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
@@ -28,7 +25,7 @@ class UserService implements UserDetailsService {
     private final UserRepository repository
     private final TokenService tokenService
 
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional
     User saveUser(UserRegisterDto user) {
         User newUser = new User(id: null,
                                 email: user.email,
@@ -39,25 +36,42 @@ class UserService implements UserDetailsService {
 
         User savedUser = repository.save(newUser)
         savedUser.password = null
-        return savedUser
+        savedUser
+    }
+
+    @Transactional
+    User updateUser(UserRegisterDto user) {
+
+        User currUser = repository.findById(user.id)
+                .orElseThrow(() -> new EntityNotFoundException("User with Id $user.id not found"))
+        User newUser = new User(id: user.id,
+                email: user.email,
+                password: user.password,
+                role: user.role,
+                name: user.name,
+                lastName: user.lastName)
+
+        User savedUser = repository.save(newUser)
+        savedUser.password = null
+        savedUser
     }
 
     AuthResponseDto getLoginCredentials(Authentication auth) {
         def token = tokenService.generateToken((User) auth.getPrincipal())
-        return new AuthResponseDto(token:token)
+        new AuthResponseDto(token:token)
     }
 
     User getUserById(String id) {
-        return repository.findById(id)
+        repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("User not found for id: $id"))
     }
 
-    Page<User> findAll() {
-
+    Page<User> findAll(SearchContext searchContext) {
+        repository.findAll(PageRequest.of(searchContext.page, searchContext.size))
     }
 
     @Override
     UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return repository.findByEmail(username)
+        repository.findByEmail(username)
     }
 }

@@ -2,42 +2,42 @@ package com.mlg.gbadmin.controller
 
 import com.mlg.gbadmin.dto.user.AuthDto
 import com.mlg.gbadmin.dto.user.UserRegisterDto
+import com.mlg.gbadmin.model.SearchContext
 import com.mlg.gbadmin.model.User
 import com.mlg.gbadmin.service.UserService
 import groovy.transform.TupleConstructor
 import groovy.util.logging.Slf4j
 import jakarta.validation.Valid
+import org.springframework.data.domain.Page
 import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
-import org.springframework.web.bind.annotation.CrossOrigin
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @TupleConstructor(includeFields = true, defaults = false)
-@RequestMapping("/auth")
+@RequestMapping("/api/users")
 @Slf4j
-@TupleConstructor(includeFields = true, defaults = false)
 @CrossOrigin("*")
 class UserController {
 
     private final UserService service
-    private final AuthenticationManager authenticationManager
-
-    @PostMapping("/login")
-    ResponseEntity login(@RequestBody @Valid AuthDto data){
-        log.info("Request login")
-        def usernamePassword = new UsernamePasswordAuthenticationToken(data.email, data.password)
-        def auth = authenticationManager.authenticate(usernamePassword)
-        return ResponseEntity.ok(service.getLoginCredentials(auth))
-    }
 
     @PostMapping("/register")
     ResponseEntity<User> createUser(@RequestBody UserRegisterDto user) {
         log.info("Saving new user")
         return ResponseEntity.ok(service.saveUser(user))
+    }
+
+    @PutMapping("/update/{id}")
+    ResponseEntity<User> updateUser(@RequestBody UserRegisterDto user) {
+        log.info("Updating user")
+        return ResponseEntity.ok(service.updateUser(user))
+    }
+
+    @GetMapping("/users")
+    ResponseEntity<Page<User>> getAllUsers(SearchContext searchContext) {
+        log.info("Getting all users")
+        return ResponseEntity.ok(service.findAll(searchContext))
     }
 }
