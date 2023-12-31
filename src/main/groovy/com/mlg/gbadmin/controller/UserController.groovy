@@ -1,17 +1,14 @@
 package com.mlg.gbadmin.controller
 
-import com.mlg.gbadmin.dto.user.AuthDto
+
 import com.mlg.gbadmin.dto.user.UserRegisterDto
 import com.mlg.gbadmin.model.SearchContext
 import com.mlg.gbadmin.model.User
 import com.mlg.gbadmin.service.UserService
 import groovy.transform.TupleConstructor
 import groovy.util.logging.Slf4j
-import jakarta.validation.Valid
 import org.springframework.data.domain.Page
 import org.springframework.http.ResponseEntity
-import org.springframework.security.authentication.AuthenticationManager
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -35,7 +32,7 @@ class UserController {
         return ResponseEntity.ok(service.updateUser(user))
     }
 
-    @GetMapping("/users")
+    @GetMapping("/all")
     ResponseEntity<Page<User>> getAllUsers(SearchContext searchContext) {
         log.info("Getting all users")
         return ResponseEntity.ok(service.findAll(searchContext))
