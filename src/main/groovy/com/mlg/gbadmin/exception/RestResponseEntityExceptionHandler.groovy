@@ -21,6 +21,14 @@ class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler 
         buildResponseBody(HttpStatus.BAD_REQUEST, ex.getMessage())
     }
 
+    @ResponseBody
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(TokenException)
+    ResponseEntity<ErrorResponse> tokenNotValid(TokenException ex) {
+        log.error(ex.getMessage())
+        buildResponseBody(HttpStatus.UNAUTHORIZED, ex.getMessage())
+    }
+
 
     private static buildResponseBody(HttpStatus httpStatus, String message) {
         new ResponseEntity<ErrorResponse>(buildResponse(httpStatus, message), httpStatus)

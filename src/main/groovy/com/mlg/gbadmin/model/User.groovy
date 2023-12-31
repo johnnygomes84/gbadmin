@@ -25,6 +25,10 @@ class User implements Serializable, UserDetails {
     String password
     @NotNull
     RoleEnum role
+    @NotNull
+    String name
+    @NotNull
+    String lastName
 
     @Override
     Collection<? extends GrantedAuthority> getAuthorities() {

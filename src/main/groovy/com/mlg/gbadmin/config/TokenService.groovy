@@ -18,12 +18,13 @@ class TokenService {
     private String secret;
 
     String generateToken(User user){
+        Map<String, String> userInfo = ["role": user.role.toString(), "fullName": "$user.name $user.lastName".toString()]
         try{
             Algorithm algorithm = Algorithm.HMAC256(secret);
             String token = JWT.create()
                     .withIssuer("auth-api")
                     .withSubject(user.email)
-                    .withClaim("role", user.role.toString())
+                    .withClaim("userinfo", userInfo)
                     .withExpiresAt(genExpirationDate())
                     .sign(algorithm);
             return token;
@@ -32,7 +33,7 @@ class TokenService {
         }
     }
 
-    public String validateToken(String token){
+    String validateToken(String token){
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.require(algorithm)
