@@ -43,4 +43,10 @@ class UserController {
         log.info("Deleting user")
         return ResponseEntity.ok(service.deleteById(id))
     }
+
+    @GetMapping("/{id}")
+    ResponseEntity<Boolean> getById(@PathVariable String id) {
+        log.info("Getting user by id")
+        return ResponseEntity.ok(service.getUserById(id))
+    }
 }
