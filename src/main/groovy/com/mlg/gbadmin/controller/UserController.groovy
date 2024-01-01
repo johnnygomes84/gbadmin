@@ -37,4 +37,10 @@ class UserController {
         log.info("Getting all users")
         return ResponseEntity.ok(service.findAll(searchContext))
     }
+
+    @DeleteMapping("/delete/{id}")
+    ResponseEntity<Boolean> deleteUser(@PathVariable String id) {
+        log.info("Deleting user")
+        return ResponseEntity.ok(service.deleteById(id))
+    }
 }

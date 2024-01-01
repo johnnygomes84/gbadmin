@@ -70,6 +70,11 @@ class UserService implements UserDetailsService {
         repository.findAll(PageRequest.of(searchContext.page, searchContext.size))
     }
 
+    Boolean deleteById(String id) {
+        repository.deleteById(id)
+        true
+    }
+
     @Override
     UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         repository.findByEmail(username)
