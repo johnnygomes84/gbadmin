@@ -32,7 +32,8 @@ class UserService implements UserDetailsService {
                                 password: new BCryptPasswordEncoder().encode(user.password),
                                 role: user.role,
                                 name: user.name,
-                                lastName: user.lastName)
+                                lastName: user.lastName,
+                                firstLogin: user.firstLogin)
 
         User savedUser = repository.save(newUser)
         savedUser.password = null
@@ -49,7 +50,8 @@ class UserService implements UserDetailsService {
                 password: user.password,
                 role: user.role,
                 name: user.name,
-                lastName: user.lastName)
+                lastName: user.lastName,
+                firstLogin: user.firstLogin)
 
         User savedUser = repository.save(newUser)
         savedUser.password = null

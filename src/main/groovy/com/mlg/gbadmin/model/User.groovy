@@ -29,6 +29,8 @@ class User implements Serializable, UserDetails {
     String name
     @NotNull
     String lastName
+    @NotNull
+    Boolean firstLogin
 
     @Override
     Collection<? extends GrantedAuthority> getAuthorities() {
