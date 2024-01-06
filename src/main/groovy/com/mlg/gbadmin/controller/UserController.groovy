@@ -1,6 +1,6 @@
 package com.mlg.gbadmin.controller
 
-
+import com.mlg.gbadmin.dto.user.PassResetDto
 import com.mlg.gbadmin.dto.user.UserRegisterDto
 import com.mlg.gbadmin.model.SearchContext
 import com.mlg.gbadmin.model.User
@@ -48,5 +48,10 @@ class UserController {
     ResponseEntity<Boolean> getById(@PathVariable String id) {
         log.info("Getting user by id")
         return ResponseEntity.ok(service.getUserById(id))
+    }
+
+    @PutMapping("/password/reset")
+    ResponseEntity<Boolean> resetPass(@RequestBody PassResetDto resetDto) {
+        return ResponseEntity.ok(service.resetUserPassword(resetDto))
     }
 }

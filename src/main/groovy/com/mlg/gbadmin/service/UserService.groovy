@@ -2,6 +2,7 @@ package com.mlg.gbadmin.service
 
 import com.mlg.gbadmin.config.TokenService
 import com.mlg.gbadmin.dto.user.AuthResponseDto
+import com.mlg.gbadmin.dto.user.PassResetDto
 import com.mlg.gbadmin.dto.user.UserRegisterDto
 import com.mlg.gbadmin.exception.EntityNotFoundException
 import com.mlg.gbadmin.model.SearchContext
@@ -56,6 +57,17 @@ class UserService implements UserDetailsService {
         User savedUser = repository.save(newUser)
         savedUser.password = null
         savedUser
+    }
+
+    @Transactional
+    Boolean resetUserPassword(PassResetDto resetDto) {
+        User currUser = repository.findById(resetDto.id)
+                .orElseThrow(() -> new EntityNotFoundException("User with Id $resetDto.id not found"))
+
+        currUser.password = new BCryptPasswordEncoder().encode(resetDto.newPass)
+        currUser.firstLogin = true
+        repository.save(currUser)
+        return true
     }
 
     AuthResponseDto getLoginCredentials(Authentication auth) {
