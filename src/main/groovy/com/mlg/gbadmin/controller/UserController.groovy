@@ -52,6 +52,7 @@ class UserController {
 
     @PutMapping("/password/reset")
     ResponseEntity<Boolean> resetPass(@RequestBody PassResetDto resetDto) {
+        log.info("Resetting password for user: {}", resetDto.id)
         return ResponseEntity.ok(service.resetUserPassword(resetDto))
     }
 }

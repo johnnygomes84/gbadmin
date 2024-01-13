@@ -30,6 +30,7 @@ class WebSecurity {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/api/users/password/reset").hasAnyRole("ADMIN", "SUPPORT")
                         .requestMatchers( "/api/users/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )

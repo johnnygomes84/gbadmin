@@ -65,7 +65,8 @@ class UserService implements UserDetailsService {
                 .orElseThrow(() -> new EntityNotFoundException("User with Id $resetDto.id not found"))
 
         currUser.password = new BCryptPasswordEncoder().encode(resetDto.newPass)
-        currUser.firstLogin = true
+
+        currUser.firstLogin = resetDto.userRequest == "ADMIN" ?: false
         repository.save(currUser)
         return true
     }

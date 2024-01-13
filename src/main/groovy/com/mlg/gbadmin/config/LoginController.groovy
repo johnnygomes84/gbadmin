@@ -1,6 +1,7 @@
 package com.mlg.gbadmin.config
 
 import com.mlg.gbadmin.dto.user.AuthDto
+import com.mlg.gbadmin.dto.user.AuthResponseDto
 import com.mlg.gbadmin.service.UserService
 import groovy.transform.TupleConstructor
 import groovy.util.logging.Slf4j
@@ -25,7 +26,7 @@ class LoginController {
     private final AuthenticationManager authenticationManager
 
     @PostMapping("/login")
-    ResponseEntity login(@RequestBody @Valid AuthDto data){
+    ResponseEntity<AuthResponseDto> login(@RequestBody @Valid AuthDto data){
         log.info("Request login")
         def usernamePassword = new UsernamePasswordAuthenticationToken(data.email, data.password)
         def auth = authenticationManager.authenticate(usernamePassword)

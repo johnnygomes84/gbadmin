@@ -1,5 +1,5 @@
 package com.mlg.gbadmin.dto.user
 
-record PassResetDto(String id, String newPass) {
+record PassResetDto(String id, String newPass, String userRequest) {
 
 }

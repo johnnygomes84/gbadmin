@@ -18,7 +18,8 @@ class TokenService {
     private String secret;
 
     String generateToken(User user){
-        Map<String, String> userInfo = ["role": user.role.toString(), "fullName": "$user.name $user.lastName".toString()]
+        Map<String, String> userInfo = ["role": user.role.toString(), "fullName": "$user.name $user.lastName".toString(),
+        "firstLogin": user.firstLogin, "userId": user.id]
         try{
             Algorithm algorithm = Algorithm.HMAC256(secret);
             String token = JWT.create()
