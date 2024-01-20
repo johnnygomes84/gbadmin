@@ -1,5 +1,6 @@
 package com.mlg.gbadmin.service
 
+import com.mlg.gbadmin.exception.EntityNotFoundException
 import com.mlg.gbadmin.model.SearchContext
 import com.mlg.gbadmin.model.Student
 import com.mlg.gbadmin.repository.StudentRepository
@@ -37,5 +38,10 @@ class StudentService {
 
     List<Student> findByStatus(SearchContext context) {
         repository.findByStatus(context.studentStatus)
+    }
+
+    Student findByStudentNumber(Long studentNumber) {
+        repository.findByStudentNumber(studentNumber)
+                .orElseThrow(() -> new EntityNotFoundException("Student not found"))
     }
 }

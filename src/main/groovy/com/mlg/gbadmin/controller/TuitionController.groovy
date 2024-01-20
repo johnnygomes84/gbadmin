@@ -3,23 +3,18 @@ package com.mlg.gbadmin.controller
 import com.mlg.gbadmin.model.SearchContext
 import com.mlg.gbadmin.model.Student
 import com.mlg.gbadmin.model.Tuition
-import com.mlg.gbadmin.service.StudentService
 import com.mlg.gbadmin.service.TuitionService
 import groovy.transform.TupleConstructor
+import groovy.util.logging.Slf4j
 import org.springframework.data.domain.Page
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.PutMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @TupleConstructor(includeFields = true, defaults = false)
 @RequestMapping("/api/tuition")
+@Slf4j
+@CrossOrigin("*")
 class TuitionController {
 
     private final TuitionService service
@@ -36,6 +31,7 @@ class TuitionController {
 
     @GetMapping("/all")
     ResponseEntity<Page<Tuition>> findAll(SearchContext searchContext) {
+        log.info("Getting all tuition")
         ResponseEntity.ok(service.findAll(searchContext))
     }
 

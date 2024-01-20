@@ -50,6 +50,12 @@ class StudentController {
         ResponseEntity.ok(service.findById(id))
     }
 
+    @GetMapping("/studentNumber/{studentNumber}")
+    ResponseEntity<Student> findByStudentNumber(@PathVariable Long studentNumber) {
+        log.info("Getting student by id")
+        ResponseEntity.ok(service.findByStudentNumber(studentNumber))
+    }
+
     @GetMapping("/all/actives")
     ResponseEntity<List<Student>> findAllByStatus(SearchContext context) {
         ResponseEntity.ok(service.findAll(searchContext))
