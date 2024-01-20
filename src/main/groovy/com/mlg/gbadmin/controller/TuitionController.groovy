@@ -24,7 +24,7 @@ class TuitionController {
         ResponseEntity.ok(service.createOrUpdate(tuition))
     }
 
-    @PutMapping("/update")
+    @PutMapping("/update/{tuitionId}")
     ResponseEntity<Tuition> updateTuition(@RequestBody Tuition tuition) {
         ResponseEntity.ok(service.createOrUpdate(tuition))
     }
