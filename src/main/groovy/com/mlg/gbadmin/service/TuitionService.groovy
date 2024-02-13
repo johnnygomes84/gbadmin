@@ -1,6 +1,5 @@
 package com.mlg.gbadmin.service
 
-import com.mlg.gbadmin.dto.DashboardTuitionDto
 import com.mlg.gbadmin.enums.MonthsEnum
 import com.mlg.gbadmin.enums.StatusEnum
 import com.mlg.gbadmin.exception.EntityNotFoundException
@@ -13,9 +12,8 @@ import groovy.transform.TupleConstructor
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
-import java.time.LocalDate
-import java.time.Month
-import java.time.format.TextStyle
+
+import static com.mlg.gbadmin.utils.CalendarUtils.getCurrentMonth
 
 @Service
 @TupleConstructor(includeFields = true, defaults = false)
@@ -56,16 +54,5 @@ class TuitionService {
         List<Long> studentNumberPaid = repository.findByReferenceMonth(MonthsEnum.valueOf(getCurrentMonth())).studentNumber
         studentRepository.findByStatusAndStudentNumberNotIn(PageRequest.of(context.page, context.size),
                                                                              StatusEnum.ACTIVE, studentNumberPaid)
-    }
-
-    DashboardTuitionDto getDashboardTuition() {
-        Long tuitionPaid = repository.countByReferenceMonth(MonthsEnum.valueOf(getCurrentMonth()))
-        Long tuitionOpen = studentRepository.countByStatus(StatusEnum.ACTIVE) - tuitionPaid
-        new DashboardTuitionDto(tuitionPaid: tuitionPaid, tuitionOpen: tuitionOpen)
-    }
-
-    private String getCurrentMonth() {
-        Integer currentMonth = LocalDate.now().monthValue
-        Month.of(currentMonth).getDisplayName(TextStyle.SHORT, Locale.UK).toUpperCase()
     }
 }

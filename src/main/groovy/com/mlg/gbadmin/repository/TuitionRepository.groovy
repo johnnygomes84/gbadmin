@@ -18,4 +18,6 @@ interface TuitionRepository extends MongoRepository<Tuition, String> {
     List<Tuition> findByReferenceMonth(MonthsEnum refMonth)
 
     Long countByReferenceMonth(MonthsEnum refMonth)
+
+    Long countByReferenceMonthNotAndStudentNumberNotIn(MonthsEnum refMonth, List<Long> studentNumber)
 }

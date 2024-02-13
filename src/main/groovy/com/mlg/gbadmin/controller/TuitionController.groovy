@@ -55,11 +55,6 @@ class TuitionController {
         ResponseEntity.ok(service.findByReferenceMonth(searchContext))
     }
 
-    @GetMapping("/dashboard")
-    ResponseEntity<Page<Tuition>> getDashboardTuition() {
-        ResponseEntity.ok(service.getDashboardTuition())
-    }
-
     @GetMapping("/student/open")
     ResponseEntity<Page<Student>> getStudentOpenTuition(SearchContext searchContext) {
         ResponseEntity.ok(service.getStudentOpenTuition(searchContext))

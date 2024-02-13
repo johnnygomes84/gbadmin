@@ -1,4 +1,4 @@
-package com.mlg.gbadmin.dto
+package com.mlg.gbadmin.dto.dashboard
 
 import groovy.transform.Canonical
 
@@ -6,4 +6,5 @@ import groovy.transform.Canonical
 class DashboardTuitionDto {
     Long tuitionPaid
     Long tuitionOpen
+    Long tuitionOpenLonger
 }
