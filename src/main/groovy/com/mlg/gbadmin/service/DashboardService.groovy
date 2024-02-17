@@ -35,8 +35,12 @@ class DashboardService {
         dashStudent.studentActive = studentFullList.count { it.status == StatusEnum.ACTIVE }
         dashStudent.studentInactive = studentFullList.count { it.status == StatusEnum.INACTIVE }
         dashStudent.studentCanceled = studentFullList.count { it.status == StatusEnum.CANCELED }
-        dashStudent.studentAdult = studentFullList.count { it.classType == ClassTypeEnum.ADULT }
-        dashStudent.studentKids = studentFullList.count { it.classType == ClassTypeEnum.KIDS }
+        dashStudent.studentMini = studentFullList.count { it.classType == ClassTypeEnum.MINI }
+        dashStudent.studentPc1 = studentFullList.count { it.classType == ClassTypeEnum.PC1 }
+        dashStudent.studentPc2 = studentFullList.count { it.classType == ClassTypeEnum.PC2 }
+        dashStudent.studentJuniors = studentFullList.count { it.classType == ClassTypeEnum.JUNIORES }
+        dashStudent.studentGB1 = studentFullList.count { it.classType == ClassTypeEnum.GB1 }
+        dashStudent.studentGB2 = studentFullList.count { it.classType == ClassTypeEnum.GB2 }
         dashStudent
     }
 

@@ -8,6 +8,10 @@ class DashboardStudentDto {
     Integer studentActive
     Integer studentInactive
     Integer studentCanceled
-    Integer studentAdult
-    Integer studentKids
+    Integer studentMini
+    Integer studentPc1
+    Integer studentPc2
+    Integer studentJuniors
+    Integer studentGB1
+    Integer studentGB2
 }
