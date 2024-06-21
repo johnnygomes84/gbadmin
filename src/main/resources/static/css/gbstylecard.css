@@ -1,0 +1,33 @@
+h1 {
+    background-color: grey;
+    text-align: center;
+}
+
+.text-up {
+    margin-top: 50px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    height: 400px;
+    width: 300px;
+    border: 2px solid;
+    border-radius: 10px;
+}
+
+h3 {
+    background-color: lightgrey;
+    text-align: center;
+    padding-bottom: 15px;
+    margin: auto;
+    padding-top: 15px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}

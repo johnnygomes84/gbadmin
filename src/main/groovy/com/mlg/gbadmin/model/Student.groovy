@@ -5,8 +5,10 @@ import com.mlg.gbadmin.enums.RankEnum
 import com.mlg.gbadmin.enums.StatusEnum
 import groovy.transform.Canonical
 import groovyjarjarantlr4.v4.runtime.misc.NotNull
+import org.hibernate.validator.constraints.UniqueElements
 import org.springframework.data.annotation.Id
 import org.springframework.data.annotation.Transient
+import org.springframework.data.mongodb.core.index.IndexOptions
 import org.springframework.data.mongodb.core.index.Indexed
 import org.springframework.data.mongodb.core.mapping.Document
 
@@ -20,7 +22,10 @@ class Student implements Serializable {
     @NotNull
     String id
     @NotNull
-    @Indexed
+    @Indexed(unique = true)
+    String email
+    @NotNull
+    @Indexed(unique = true)
     Long studentNumber
     @NotNull
     String name
