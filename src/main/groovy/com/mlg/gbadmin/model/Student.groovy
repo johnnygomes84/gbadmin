@@ -12,6 +12,8 @@ import org.springframework.data.mongodb.core.index.IndexOptions
 import org.springframework.data.mongodb.core.index.Indexed
 import org.springframework.data.mongodb.core.mapping.Document
 
+import java.time.LocalDate
+
 
 @Canonical
 @Document
@@ -41,4 +43,5 @@ class Student implements Serializable {
     ClassTypeEnum classType
     @NotNull
     StatusEnum status
+    LocalDate lastGraduation
 }
