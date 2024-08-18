@@ -65,7 +65,7 @@ class AlertService {
                     studentNumber: std.studentNumber,
                     type: GRADUATION,
                     status: NEW,
-                    message: "Last graduation for student: ${std.name} ${std.lastName} was held four months ago.",
+                    message: "Last graduation for student: ${std.name} ${std.lastName} was held more than four months ago.",
                     statusDate: LocalDate.now()
             )
         }
